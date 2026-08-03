@@ -35,9 +35,10 @@ jobs:
           run: |
             mkdir -p ${{ github.workspace }}/freelancer_folder/EXE/flhook_plugins/crafting
             cp Freelancer/EXE/flhook_plugins/crafting/* ${{ github.workspace }}/freelancer_folder/EXE/flhook_plugins/crafting/
-
+        - name: Install latest darkstat
+          uses: darklab8/fl-darkstat/.github/actions/install-latest@master
         - name: validate
-          run: echo 'v0.0.0' > darkstat/settings/version.txt ; templ generate && go run . --map-on --stat-deals-on validate error
+          run: darkstat --map-on --stat-deals-on validate error
           env:
             CONFIGS_FREELANCER_FOLDER: "${{ github.workspace }}/${{ matrix.freelancer-mod }}"
 
