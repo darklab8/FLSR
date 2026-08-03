@@ -18,17 +18,17 @@ jobs:
         - name: Check out source repository
           uses: actions/checkout@v2
 
-        - uses: darklab8/infra/.github/actions/checkout-freelancer@master
-          with:
-            freelancer-mod: "vanilla"
-            freelancer-folder: ${{ github.workspace }}/freelancer_folder
-            ssh-key-base64-vanilla: ${{ secrets.ID_RSA_FILES_FREELANCER_VANILLA }}
         - name: Cache Vanilla Freelancer
           id: cache-freelancer
           uses: actions/cache@v3
           with:
             key: ${{ runner.os }}-${{ github.workspace }}/vanilla-freelancer
             path: "${{ github.workspace }}/freelancer_folder"
+        - uses: darklab8/infra/.github/actions/checkout-freelancer@master
+          with:
+            freelancer-mod: "vanilla"
+            freelancer-folder: ${{ github.workspace }}/freelancer_folder
+            ssh-key-base64-vanilla: ${{ secrets.ID_RSA_FILES_FREELANCER_VANILLA }}
 
         - name: Set up Go
           uses: darklab8/infra/.github/actions/install-go@master
